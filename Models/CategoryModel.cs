@@ -7,7 +7,7 @@ namespace TestWebApi.Models
     {
         public CategoryModel()
         {
-            Product = new Collection<ProductModel>();
+            Products = new Collection<ProductModel>();
         }
         [Key]
         public int CategoryId { get; set; }
