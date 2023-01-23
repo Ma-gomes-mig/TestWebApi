@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TestWebApi.Context;
 using TestWebApi.Models;
 
@@ -48,6 +49,20 @@ namespace TestWebApi.Controllers
             _context.SaveChanges();
 
             return new CreatedAtRouteResult("GetProduct", new { id = product.ProductId }, product);
+        }
+
+        [HttpPut("{id:int}")]
+        public ActionResult Put(int id, ProductModel product)
+        {
+            if(id != product.ProductId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(product).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return Ok(product);
         }
     }
 }
