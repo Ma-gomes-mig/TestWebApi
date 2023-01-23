@@ -12,5 +12,7 @@ namespace TestWebApi.Models
         public string ImagesUrl { get; set;}
         public float stock { get; set; }
         public DateTime DateRegistration { get; set; }
+        public int CategoryId { get; set; }
+        public CategoryModel? Category { get; set; }
     }
 }
