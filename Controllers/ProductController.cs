@@ -29,15 +29,25 @@ namespace TestWebApi.Controllers
             return product;
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name ="GetProduct")]
         public ActionResult<ProductModel> Get(int id)
         {
             var product = _context.Product.FirstOrDefault(p => p.ProductId == id);
             if(product is null)
             {
-                return NotFound();
+                return NotFound("Produto não encontrado");
             }
             return product;
+        }
+
+        [HttpPost]
+        public ActionResult Post(ProductModel product)
+        {
+            if(product is null)  return BadRequest();
+            _context.Product.Add(product);
+            _context.SaveChanges();
+
+            return new CreatedAtRouteResult("GetProduct", new { id = product.ProductId }, product);
         }
     }
 }
