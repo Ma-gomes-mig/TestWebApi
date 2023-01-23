@@ -28,5 +28,16 @@ namespace TestWebApi.Controllers
             }
             return product;
         }
+
+        [HttpGet("{id:int}")]
+        public ActionResult<ProductModel> Get(int id)
+        {
+            var product = _context.Product.FirstOrDefault(p => p.ProductId == id);
+            if(product is null)
+            {
+                return NotFound();
+            }
+            return product;
+        }
     }
 }
