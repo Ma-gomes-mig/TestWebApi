@@ -22,7 +22,7 @@ namespace TestWebApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ProductModel>> Get()
         {
-            var product = _context.Product.ToList();
+            var product = _context.Product.AsNoTracking().ToList();
             if(product is null)
             {
                 return NotFound("Produtos não encontrados");
@@ -33,7 +33,7 @@ namespace TestWebApi.Controllers
         [HttpGet("{id:int}", Name ="GetProduct")]
         public ActionResult<ProductModel> Get(int id)
         {
-            var product = _context.Product.FirstOrDefault(p => p.ProductId == id);
+            var product = _context.Product.AsNoTracking().FirstOrDefault(p => p.ProductId == id);
             if(product is null)
             {
                 return NotFound("Produto não encontrado");

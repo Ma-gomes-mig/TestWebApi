@@ -19,19 +19,19 @@ namespace TestWebApi.Controllers
         [HttpGet("product")]
         public ActionResult<IEnumerable<CategoryModel>> GetCategoryProduct()
         {
-            return _context.Category.Include(p => p.Products).ToList();
+            return _context.Category.Include(p => p.Products).AsNoTracking().ToList();
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<CategoryModel>> Get()
         {
-            return _context.Category.ToList();
+            return _context.Category.AsNoTracking().ToList();
         }
 
         [HttpGet("{id:int}", Name = "GetCategory")]
         public ActionResult<CategoryModel> Get(int id)
         {
-            var category = _context.Category.FirstOrDefault(p => p.CategoryId == id);
+            var category = _context.Category.AsNoTracking().FirstOrDefault(p => p.CategoryId == id);
             if(category == null)
             {
                 return NotFound("Categoria não encontrada");
