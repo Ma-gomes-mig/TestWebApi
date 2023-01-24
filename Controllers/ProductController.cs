@@ -17,6 +17,10 @@ namespace TestWebApi.Controllers
             _context = context;
         }
 
+        //Dica: Nunca retornar todos os registros do Get em uma consulta. Exemplo: _context.ProductModel.Take(10).ToList();
+        //Dica: Nunca retornar objetos relacionados sem aplicar um filtro. Exemplo: _context.CategoryModel.Include(p => p.Product)
+                                                                                          //.Where(c => c.CategoryId <= 5).ToList();
+
         //O IEnumerable permite adiar a execução ou seja ele vai trabalhar por demanda.
         //Usando o IEnumerable não é preciso ter toda a coleção na memoria.
         [HttpGet]
